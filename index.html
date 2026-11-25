@@ -1,0 +1,955 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>抖音阴性版免费_内容创作工具_让灵感自由生长</title>
+<meta name="description" content="抖音阴性版免费是面向内容创作者的轻量创作平台，提供视频脚本、分镜模板、社区灵感与免费工具，帮助每一位创作者找到属于自己的表达方式。">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg:#0a0a0f;
+--bg2:#12121a;
+--bg3:#1a1a26;
+--card:#16161f;
+--line:rgba(255,255,255,.08);
+--line2:rgba(255,255,255,.14);
+--txt:#eaeaf2;
+--txt2:#a0a0b8;
+--txt3:#6c6c85;
+--acc:#25f4ee;
+--acc2:#fe2c55;
+--acc3:#ffd166;
+--grad:linear-gradient(135deg,#25f4ee 0%,#7b6cff 50%,#fe2c55 100%);
+--grad2:linear-gradient(135deg,#fe2c55 0%,#ffd166 100%);
+--r:18px;
+--sh:0 18px 50px rgba(0,0,0,.45);
+}
+html{scroll-behavior:smooth}
+body{
+background:var(--bg);
+color:var(--txt);
+font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+line-height:1.75;
+overflow-x:hidden;
+font-size:16px;
+-webkit-font-smoothing:antialiased;
+}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+::selection{background:rgba(37,244,238,.3);color:#fff}
+
+/* ---------- 背景光晕 ---------- */
+.bg-glow{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.bg-glow span{position:absolute;border-radius:50%;filter:blur(120px);opacity:.22}
+.bg-glow span:nth-child(1){width:520px;height:520px;background:#25f4ee;top:-160px;left:-120px}
+.bg-glow span:nth-child(2){width:480px;height:480px;background:#fe2c55;top:30%;right:-180px;opacity:.16}
+.bg-glow span:nth-child(3){width:600px;height:600px;background:#7b6cff;bottom:-260px;left:20%;opacity:.14}
+.bg-grid{position:fixed;inset:0;z-index:-1;pointer-events:none;
+background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+background-size:64px 64px;
+mask-image:radial-gradient(ellipse at 50% 0%,#000 0%,transparent 75%);
+-webkit-mask-image:radial-gradient(ellipse at 50% 0%,#000 0%,transparent 75%);
+}
+
+/* ---------- 导航 ---------- */
+header{position:fixed;top:0;left:0;right:0;z-index:100;transition:.35s}
+header.scrolled{background:rgba(10,10,15,.82);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.nav{max-width:1240px;margin:0 auto;padding:0 28px;height:74px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.logo{display:flex;align-items:center;gap:11px;font-weight:800;font-size:20px;letter-spacing:.5px;flex-shrink:0}
+.logo-mark{width:38px;height:38px;border-radius:12px;background:var(--grad);display:grid;place-items:center;box-shadow:0 6px 22px rgba(37,244,238,.28);position:relative;overflow:hidden}
+.logo-mark::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.32),transparent 55%)}
+.logo-mark svg{width:20px;height:20px;position:relative;z-index:1}
+.logo b{background:linear-gradient(90deg,#fff,#bfe9ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.nav-links{display:flex;gap:6px;align-items:center}
+.nav-links a{padding:9px 15px;border-radius:10px;font-size:14.5px;color:var(--txt2);transition:.25s;position:relative}
+.nav-links a:hover{color:var(--txt);background:rgba(255,255,255,.055)}
+.nav-links a.active{color:#fff}
+.nav-links a.active::after{content:"";position:absolute;left:50%;bottom:2px;transform:translateX(-50%);width:16px;height:2.5px;border-radius:2px;background:var(--grad)}
+.nav-cta{display:flex;gap:12px;align-items:center;flex-shrink:0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 22px;border-radius:12px;font-size:14.5px;font-weight:600;transition:.3s;white-space:nowrap;position:relative;overflow:hidden}
+.btn-primary{background:var(--grad);color:#08080d;box-shadow:0 8px 26px rgba(37,244,238,.24)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(37,244,238,.4)}
+.btn-ghost{border:1px solid var(--line2);color:var(--txt);background:rgba(255,255,255,.03)}
+.btn-ghost:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.28);transform:translateY(-2px)}
+.nav-toggle{display:none;width:42px;height:42px;border-radius:11px;border:1px solid var(--line2);place-items:center}
+.nav-toggle span{display:block;width:18px;height:2px;background:var(--txt);border-radius:2px;position:relative;transition:.3s}
+.nav-toggle span::before,.nav-toggle span::after{content:"";position:absolute;left:0;width:18px;height:2px;background:var(--txt);border-radius:2px;transition:.3s}
+.nav-toggle span::before{top:-6px}
+.nav-toggle span::after{top:6px}
+.nav-toggle.on span{background:transparent}
+.nav-toggle.on span::before{top:0;transform:rotate(45deg)}
+.nav-toggle.on span::after{top:0;transform:rotate(-45deg)}
+
+/* ---------- 主视觉 ---------- */
+.hero{position:relative;padding:158px 0 90px;overflow:hidden}
+.hero-inner{max-width:1240px;margin:0 auto;padding:0 28px;display:grid;grid-template-columns:1.06fr .94fr;gap:60px;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:9px;padding:7px 15px 7px 8px;border-radius:100px;border:1px solid var(--line2);background:rgba(255,255,255,.04);font-size:13px;color:var(--txt2);margin-bottom:26px}
+.hero-badge i{width:22px;height:22px;border-radius:50%;background:var(--grad2);display:grid;place-items:center;font-style:normal;font-size:11px;color:#12070a;font-weight:800}
+.hero-badge em{font-style:normal;color:var(--acc);font-weight:600}
+h1{font-size:clamp(42px,6.4vw,78px);line-height:1.04;font-weight:900;letter-spacing:-2px;margin-bottom:10px}
+h1 .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-block}
+h1 .outline{color:transparent;-webkit-text-stroke:1.6px rgba(255,255,255,.42)}
+.hero-sub{font-size:clamp(18px,2.1vw,23px);font-weight:600;color:var(--txt);margin-bottom:20px;letter-spacing:.4px}
+.hero-sub span{color:var(--acc3)}
+.hero-desc{font-size:16px;color:var(--txt2);max-width:520px;margin-bottom:34px;line-height:1.9}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:40px}
+.stats{display:flex;gap:38px;flex-wrap:wrap}
+.stat b{display:block;font-size:30px;font-weight:800;letter-spacing:-1px;background:linear-gradient(180deg,#fff,#8b8ba8);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.2}
+.stat b i{font-style:normal;font-size:16px;color:var(--acc)}
+.stat span{font-size:13px;color:var(--txt3);letter-spacing:.5px}
+
+/* 主视觉视觉卡 */
+.hero-visual{position:relative;height:520px}
+.phone{
+position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+width:262px;height:494px;border-radius:36px;padding:9px;
+background:linear-gradient(160deg,#f7f7fa,#c9c9d6 40%,#e7e7ee 70%,#b6b6c8);
+box-shadow:0 40px 90px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.12);
+z-index:2;
+}
+.phone-screen{width:100%;height:100%;border-radius:29px;background:#08080e;overflow:hidden;position:relative;display:flex;flex-direction:column}
+.phone-notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:88px;height:20px;background:#08080e;border-radius:0 0 14px 14px;z-index:5}
+.pv-gradient{height:46%;background:linear-gradient(155deg,#25f4ee,#7b6cff 55%,#fe2c55);position:relative;overflow:hidden;flex-shrink:0}
+.pv-gradient::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 70% 20%,rgba(255,255,255,.45),transparent 55%)}
+.pv-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.22);backdrop-filter:blur(8px);border:1.5px solid rgba(255,255,255,.6);display:grid;place-items:center;z-index:2;animation:pulse 2.6s infinite}
+.pv-play svg{width:20px;height:20px;margin-left:3px;fill:#fff}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,.4)}50%{box-shadow:0 0 0 16px rgba(255,255,255,0)}}
+.pv-body{padding:14px 15px;flex:1;display:flex;flex-direction:column;gap:9px}
+.pv-line{height:9px;border-radius:5px;background:rgba(255,255,255,.13)}
+.pv-line.w70{width:70%}
+.pv-line.w45{width:45%}
+.pv-line.w88{width:88%}
+.pv-line.grad{background:linear-gradient(90deg,#25f4ee,#fe2c55);height:7px}
+.pv-tags{display:flex;gap:6px;margin-top:auto;flex-wrap:wrap}
+.pv-tag{font-size:9px;padding:3px 8px;border-radius:20px;border:1px solid rgba(255,255,255,.2);color:#b9b9d0}
+.float-card{
+position:absolute;background:rgba(24,24,34,.86);backdrop-filter:blur(16px);
+border:1px solid var(--line2);border-radius:16px;padding:13px 16px;z-index:3;
+box-shadow:var(--sh);
+}
+.fc-1{top:34px;right:-6px;animation:float1 6s ease-in-out infinite}
+.fc-2{bottom:66px;left:-14px;animation:float2 7s ease-in-out infinite}
+.fc-3{top:44%;left:-30px;animation:float1 8s ease-in-out infinite .5s}
+@keyframes float1{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes float2{0%,100%{transform:translateY(0)}50%{transform:translateY(12px)}}
+.fc-title{font-size:11px;color:var(--txt3);letter-spacing:.6px;margin-bottom:5px}
+.fc-val{font-size:19px;font-weight:800;letter-spacing:-.4px}
+.fc-val.c1{color:var(--acc)}
+.fc-val.c2{color:var(--acc2)}
+.fc-val.c3{color:var(--acc3)}
+.fc-bar{width:118px;height:5px;border-radius:3px;background:rgba(255,255,255,.12);margin-top:7px;overflow:hidden}
+.fc-bar i{display:block;height:100%;border-radius:3px;background:var(--grad);width:72%;animation:barGo 3s ease-in-out infinite alternate}
+@keyframes barGo{from{width:42%}to{width:92%}}
+.fc-row{display:flex;align-items:center;gap:9px}
+.fc-dot{width:9px;height:9px;border-radius:50%;background:var(--acc);box-shadow:0 0 12px var(--acc);flex-shrink:0}
+.fc-dot.red{background:var(--acc2);box-shadow:0 0 12px var(--acc2)}
+
+/* ---------- 通用区块 ---------- */
+section{position:relative}
+.wrap{max-width:1240px;margin:0 auto;padding:0 28px}
+.sec{padding:96px 0}
+.sec-head{max-width:720px;margin-bottom:54px}
+.sec-head.center{margin-left:auto;margin-right:auto;text-align:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;letter-spacing:2.4px;text-transform:uppercase;color:var(--acc);font-weight:700;margin-bottom:16px}
+.eyebrow::before{content:"";width:22px;height:2px;background:var(--acc);border-radius:2px}
+.sec-head.center .eyebrow::before{display:none}
+h2{font-size:clamp(30px,4.2vw,48px);line-height:1.14;font-weight:900;letter-spacing:-1.4px;margin-bottom:16px}
+h2 .grad{background:var(--grad2);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sec-desc{font-size:16px;color:var(--txt2);line-height:1.9}
+
+/* ---------- 特性 ---------- */
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.f-card{
+background:linear-gradient(170deg,var(--card),rgba(14,14,21,.9));
+border:1px solid var(--line);border-radius:var(--r);padding:30px 28px;
+transition:.4s cubic-bezier(.2,.8,.2,1);position:relative;overflow:hidden;
+}
+.f-card::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(37,244,238,.5),transparent);opacity:0;transition:.4s}
+.f-card:hover{transform:translateY(-7px);border-color:rgba(37,244,238,.28);box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.f-card:hover::before{opacity:1}
+.f-icon{width:52px;height:52px;border-radius:14px;background:rgba(37,244,238,.1);border:1px solid rgba(37,244,238,.2);display:grid;place-items:center;margin-bottom:22px;transition:.4s}
+.f-card:hover .f-icon{background:rgba(37,244,238,.18);transform:rotate(-6deg) scale(1.06)}
+.f-icon svg{width:24px;height:24px;stroke:var(--acc);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.f-card:nth-child(2) .f-icon{background:rgba(254,44,85,.1);border-color:rgba(254,44,85,.22)}
+.f-card:nth-child(2) .f-icon svg{stroke:var(--acc2)}
+.f-card:nth-child(3) .f-icon{background:rgba(255,209,102,.1);border-color:rgba(255,209,102,.22)}
+.f-card:nth-child(3) .f-icon svg{stroke:var(--acc3)}
+.f-card h3{font-size:19px;font-weight:700;margin-bottom:11px;letter-spacing:-.3px}
+.f-card p{font-size:14.5px;color:var(--txt2);line-height:1.85}
+.f-meta{margin-top:18px;font-size:12px;color:var(--txt3);display:flex;gap:8px;flex-wrap:wrap}
+.f-meta span{padding:3px 9px;border-radius:20px;background:rgba(255,255,255,.055);border:1px solid var(--line)}
+
+/* ---------- 数据条 ---------- */
+.metrics{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.022),transparent)}
+.metrics-inner{max-width:1240px;margin:0 auto;padding:52px 28px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.metric{text-align:center;position:relative}
+.metric+.metric::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);width:1px;height:52px;background:var(--line2)}
+.metric b{display:block;font-size:clamp(30px,3.6vw,44px);font-weight:900;letter-spacing:-1.5px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.1}
+.metric span{font-size:13.5px;color:var(--txt3);letter-spacing:.6px}
+
+/* ---------- 创作流程 ---------- */
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;position:relative}
+.flow::before{content:"";position:absolute;top:46px;left:9%;right:9%;height:1px;background:linear-gradient(90deg,rgba(37,244,238,.5),rgba(123,108,255,.5),rgba(254,44,85,.5));z-index:0}
+.flow-step{position:relative;z-index:1;text-align:center;padding:0 8px}
+.flow-num{width:64px;height:64px;margin:0 auto 20px;border-radius:20px;background:var(--bg2);border:1px solid var(--line2);display:grid;place-items:center;font-size:21px;font-weight:800;position:relative;transition:.4s}
+.flow-step:hover .flow-num{background:var(--grad);color:#08080d;transform:translateY(-6px) scale(1.06);border-color:transparent;box-shadow:0 14px 34px rgba(37,244,238,.3)}
+.flow-step h3{font-size:16.5px;font-weight:700;margin-bottom:8px}
+.flow-step p{font-size:13.5px;color:var(--txt2);line-height:1.8}
+
+/* ---------- 作品展示 ---------- */
+.gallery{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:210px;gap:16px}
+.g-item{border-radius:16px;overflow:hidden;position:relative;background:var(--bg3);border:1px solid var(--line);transition:.45s cubic-bezier(.2,.8,.2,1);cursor:pointer}
+.g-item:hover{transform:scale(1.018);border-color:rgba(37,244,238,.35);box-shadow:0 22px 55px rgba(0,0,0,.55)}
+.g-item .g-art{position:absolute;inset:0;transition:.6s}
+.g-item:hover .g-art{transform:scale(1.09)}
+.g-item .g-ov{position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(5,5,10,.92));z-index:1}
+.g-item .g-info{position:absolute;left:0;right:0;bottom:0;padding:18px;z-index:2}
+.g-item h4{font-size:15.5px;font-weight:700;margin-bottom:5px;letter-spacing:-.2px}
+.g-item p{font-size:12.5px;color:var(--txt2);display:flex;align-items:center;gap:7px}
+.g-item p i{font-style:normal;width:5px;height:5px;border-radius:50%;background:var(--acc)}
+.g-item .g-tag{position:absolute;top:14px;left:14px;z-index:2;font-size:11px;padding:4px 11px;border-radius:20px;background:rgba(8,8,14,.7);backdrop-filter:blur(8px);border:1px solid var(--line2);color:#dcdcf0}
+.g-1{grid-column:span 3;grid-row:span 2}
+.g-2{grid-column:span 3}
+.g-3{grid-column:span 1.5;grid-column:span 1}
+.g-4{grid-column:span 2}
+.art-a{background:radial-gradient(circle at 30% 25%,#25f4ee,transparent 55%),radial-gradient(circle at 78% 70%,#fe2c55,transparent 60%),#141422}
+.art-b{background:conic-gradient(from 210deg at 60% 40%,#7b6cff,#25f4ee,#fe2c55,#7b6cff)}
+.art-c{background:radial-gradient(circle at 65% 30%,#ffd166,transparent 55%),linear-gradient(160deg,#241a2e,#0e0e17)}
+.art-d{background:linear-gradient(120deg,#fe2c55 0%,#7b6cff 55%,#25f4ee 100%)}
+.art-e{background:radial-gradient(circle at 20% 80%,#25f4ee,transparent 50%),radial-gradient(circle at 85% 20%,#7b6cff,transparent 55%),#12121c}
+.art-f{background:linear-gradient(210deg,#0e0e17 20%,#25f4ee 120%),repeating-linear-gradient(45deg,rgba(255,255,255,.05) 0 2px,transparent 2px 12px)}
+.g-1 .g-art::after,.art-b::after,.art-d::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:34px 34px;mix-blend-mode:overlay}
+
+/* ---------- 模板 / 资源 ---------- */
+.tpl-tabs{display:flex;gap:10px;margin-bottom:34px;flex-wrap:wrap}
+.tpl-tab{padding:9px 20px;border-radius:100px;font-size:14px;border:1px solid var(--line2);color:var(--txt2);transition:.3s;background:rgba(255,255,255,.025)}
+.tpl-tab:hover{color:#fff;border-color:rgba(255,255,255,.3)}
+.tpl-tab.on{background:var(--grad);color:#08080d;border-color:transparent;font-weight:700;box-shadow:0 8px 24px rgba(37,244,238,.26)}
+.tpl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.tpl-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;transition:.35s;display:flex;flex-direction:column;gap:14px}
+.tpl-card:hover{border-color:rgba(123,108,255,.4);transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,.45)}
+.tpl-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.tpl-card h4{font-size:16.5px;font-weight:700;letter-spacing:-.2px}
+.tpl-free{font-size:10.5px;font-weight:800;letter-spacing:1px;padding:4px 9px;border-radius:6px;background:rgba(37,244,238,.13);color:var(--acc);border:1px solid rgba(37,244,238,.28);flex-shrink:0}
+.tpl-card p{font-size:13.5px;color:var(--txt2);line-height:1.8;flex:1}
+.tpl-foot{display:flex;justify-content:space-between;align-items:center;padding-top:14px;border-top:1px solid var(--line);font-size:12.5px;color:var(--txt3)}
+.tpl-foot a{color:var(--acc);font-weight:600;display:inline-flex;align-items:center;gap:5px;transition:.25s}
+.tpl-foot a:hover{gap:9px}
+.tpl-foot a svg{width:13px;height:13px;stroke:var(--acc);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- 用户故事 ---------- */
+.stories{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:18px;align-items:stretch}
+.story{background:linear-gradient(170deg,var(--card),rgba(13,13,20,.92));border:1px solid var(--line);border-radius:16px;padding:30px 26px;display:flex;flex-direction:column;transition:.35s;position:relative;overflow:hidden}
+.story:hover{border-color:var(--line2);transform:translateY(-4px)}
+.story.big{background:linear-gradient(150deg,rgba(37,244,238,.1),rgba(123,108,255,.08) 45%,rgba(254,44,85,.1));border-color:rgba(123,108,255,.28)}
+.quote-mark{font-size:56px;line-height:.6;font-weight:900;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:16px;height:34px}
+.story p{font-size:14.5px;color:var(--txt);line-height:1.95;flex:1;margin-bottom:22px}
+.story.big p{font-size:16.5px;line-height:1.9}
+.story-user{display:flex;align-items:center;gap:12px;padding-top:18px;border-top:1px solid var(--line)}
+.avatar{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:15px;color:#0a0a10;flex-shrink:0}
+.av1{background:var(--grad)}
+.av2{background:linear-gradient(135deg,#ffd166,#fe2c55)}
+.av3{background:linear-gradient(135deg,#7b6cff,#25f4ee)}
+.story-user b{display:block;font-size:14px;font-weight:700}
+.story-user span{font-size:12px;color:var(--txt3)}
+
+/* ---------- 社区动态 ---------- */
+.updates{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.upd{display:flex;gap:18px;padding:22px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.02);transition:.3s}
+.upd:hover{background:rgba(255,255,255,.045);border-color:var(--line2);transform:translateX(5px)}
+.upd-date{flex-shrink:0;text-align:center;width:62px;padding:9px 0;border-radius:11px;background:var(--bg3);border:1px solid var(--line2)}
+.upd-date b{display:block;font-size:21px;font-weight:800;line-height:1.1;color:var(--acc)}
+.upd-date span{font-size:10.5px;color:var(--txt3);letter-spacing:.5px}
+.upd-body h4{font-size:15.5px;font-weight:700;margin-bottom:7px}
+.upd-body p{font-size:13.5px;color:var(--txt2);line-height:1.8}
+.upd-body .tagline{display:inline-block;margin-top:9px;font-size:11.5px;color:var(--acc3);padding:2px 9px;border-radius:20px;background:rgba(255,209,102,.1);border:1px solid rgba(255,209,102,.22)}
+
+/* ---------- 常见问题 ---------- */
+.faq{max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.faq-item{border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.022);overflow:hidden;transition:.3s}
+.faq-item.open{border-color:rgba(37,244,238,.3);background:rgba(37,244,238,.04)}
+.faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:18px;padding:20px 24px;font-size:15.5px;font-weight:600;text-align:left;transition:.25s}
+.faq-q:hover{color:var(--acc)}
+.faq-q i{width:22px;height:22px;border-radius:50%;border:1px solid var(--line2);display:grid;place-items:center;flex-shrink:0;font-style:normal;font-size:15px;color:var(--txt2);transition:.35s;line-height:1}
+.faq-item.open .faq-q i{transform:rotate(45deg);background:var(--acc);color:#08080d;border-color:transparent}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.faq-a div{padding:0 24px 22px;font-size:14.5px;color:var(--txt2);line-height:1.9}
+
+/* ---------- CTA ---------- */
+.cta{padding:96px 0 110px}
+.cta-box{position:relative;border-radius:26px;overflow:hidden;padding:68px 48px;text-align:center;border:1px solid rgba(123,108,255,.3);background:linear-gradient(150deg,rgba(37,244,238,.14),rgba(123,108,255,.14) 48%,rgba(254,44,85,.14))}
+.cta-box::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 0%,rgba(37,244,238,.28),transparent 55%),radial-gradient(circle at 85% 100%,rgba(254,44,85,.28),transparent 55%);pointer-events:none}
+.cta-box>*{position:relative;z-index:1}
+.cta-box h2{margin-bottom:16px}
+.cta-box p{color:var(--txt2);font-size:16px;max-width:560px;margin:0 auto 34px;line-height:1.9}
+.cta-form{display:flex;gap:12px;max-width:520px;margin:0 auto 20px;flex-wrap:wrap;justify-content:center}
+.cta-form input{flex:1;min-width:220px;padding:14px 20px;border-radius:12px;border:1px solid var(--line2);background:rgba(8,8,14,.55);color:var(--txt);font-size:14.5px;outline:none;transition:.3s;font-family:inherit}
+.cta-form input::placeholder{color:var(--txt3)}
+.cta-form input:focus{border-color:var(--acc);box-shadow:0 0 0 3px rgba(37,244,238,.14)}
+.cta-note{font-size:12.5px;color:var(--txt3)}
+
+/* ---------- 页脚 ---------- */
+footer{border-top:1px solid var(--line);background:rgba(6,6,10,.6);padding:64px 0 0}
+.foot-grid{display:grid;grid-template-columns:1.7fr repeat(3,1fr);gap:40px;padding-bottom:52px}
+.foot-brand .logo{margin-bottom:18px}
+.foot-brand p{font-size:13.5px;color:var(--txt3);line-height:1.9;max-width:280px;margin-bottom:20px}
+.foot-social{display:flex;gap:10px}
+.foot-social a{width:36px;height:36px;border-radius:10px;border:1px solid var(--line2);display:grid;place-items:center;transition:.3s;background:rgba(255,255,255,.025)}
+.foot-social a:hover{background:var(--grad);border-color:transparent;transform:translateY(-3px)}
+.foot-social svg{width:16px;height:16px;fill:var(--txt2);transition:.3s}
+.foot-social a:hover svg{fill:#08080d}
+.foot-col h5{font-size:13.5px;font-weight:700;letter-spacing:.6px;margin-bottom:18px;color:var(--txt)}
+.foot-col a{display:block;font-size:13.5px;color:var(--txt3);padding:6px 0;transition:.25s}
+.foot-col a:hover{color:var(--acc);transform:translateX(4px)}
+.foot-bottom{border-top:1px solid var(--line);padding:24px 0;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--txt3)}
+.foot-bottom .fb-links{display:flex;gap:22px;flex-wrap:wrap}
+.foot-bottom a:hover{color:var(--acc)}
+
+/* ---------- 回到顶部 ---------- */
+.top-btn{position:fixed;right:26px;bottom:28px;width:46px;height:46px;border-radius:13px;background:rgba(24,24,34,.9);backdrop-filter:blur(12px);border:1px solid var(--line2);display:grid;place-items:center;z-index:90;opacity:0;visibility:hidden;transform:translateY(16px);transition:.35s}
+.top-btn.show{opacity:1;visibility:visible;transform:translateY(0)}
+.top-btn:hover{background:var(--grad);border-color:transparent}
+.top-btn svg{width:18px;height:18px;stroke:var(--txt);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;transition:.3s}
+.top-btn:hover svg{stroke:#08080d}
+
+/* ---------- 动画 ---------- */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- 响应式 ---------- */
+@media(max-width:1080px){
+.hero-inner{grid-template-columns:1fr;gap:56px}
+.hero-visual{height:470px;order:-1;max-width:420px;margin:0 auto;width:100%}
+.features{grid-template-columns:repeat(2,1fr)}
+.flow{grid-template-columns:repeat(2,1fr);gap:34px}
+.flow::before{display:none}
+.gallery{grid-template-columns:repeat(2,1fr)}
+.g-1,.g-2,.g-3,.g-4{grid-column:span 1;grid-row:span 1}
+.g-1{grid-column:span 2}
+.tpl-grid{grid-template-columns:repeat(2,1fr)}
+.stories{grid-template-columns:1fr 1fr}
+.story.big{grid-column:span 2}
+.updates{grid-template-columns:1fr}
+.foot-grid{grid-template-columns:1fr 1fr;gap:34px}
+.nav-links{display:none}
+.nav-toggle{display:grid}
+.nav-cta .btn-ghost{display:none}
+}
+@media(max-width:720px){
+.nav{padding:0 18px;height:66px}
+.wrap{padding:0 18px}
+.hero{padding:120px 0 60px}
+.hero-inner{padding:0 18px}
+h1{letter-spacing:-1px}
+.stats{gap:26px}
+.metrics-inner{grid-template-columns:1fr 1fr;gap:30px;padding:40px 18px}
+.metric+.metric::before{display:none}
+.metric:nth-child(odd)::after{content:"";position:absolute;right:-8px;top:50%;transform:translateY(-50%);width:1px;height:44px;background:var(--line2)}
+.features,.tpl-grid{grid-template-columns:1fr}
+.gallery{grid-template-columns:1fr;grid-auto-rows:190px}
+.g-1{grid-column:span 1}
+.stories{grid-template-columns:1fr}
+.story.big{grid-column:span 1}
+.foot-grid{grid-template-columns:1fr}
+.cta-box{padding:48px 24px}
+.sec{padding:68px 0}
+.hero-visual{height:430px}
+.phone{width:238px;height:446px}
+.fc-3{display:none}
+.fc-1{right:-4px}
+.fc-2{left:-6px}
+.foot-bottom{flex-direction:column;align-items:flex-start}
+.top-btn{right:16px;bottom:18px}
+}
+</style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<div class="bg-glow"><span></span><span></span><span></span></div>
+<div class="bg-grid"></div>
+
+<header id="header">
+<nav class="nav">
+<a href="#" class="logo" aria-label="抖音阴性版免费首页">
+<span class="logo-mark">
+<svg viewBox="0 0 24 24" fill="none"><path d="M13 2v12.5a3.5 3.5 0 1 1-3.5-3.5" stroke="#08080d" stroke-width="2.2" stroke-linecap="round"/><path d="M13 2c.4 3.4 2.6 5.6 6 6" stroke="#08080d" stroke-width="2.2" stroke-linecap="round"/></svg>
+</span>
+<b>抖音阴性版免费</b>
+</a>
+<div class="nav-links" id="navLinks">
+<a href="#capabilities" class="active">核心能力</a>
+<a href="#flow">创作流程</a>
+<a href="#works">作品灵感</a>
+<a href="#resources">免费资源</a>
+<a href="#community">社区动态</a>
+<a href="#faq">常见问题</a>
+</div>
+<div class="nav-cta">
+<a href="#start" class="btn btn-ghost">登录</a>
+<a href="#start" class="btn btn-primary">免费开始</a>
+<button class="nav-toggle" id="navToggle" aria-label="菜单"><span></span></button>
+</div>
+</nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+<div class="hero-inner">
+<div>
+<div class="hero-badge"><i>✓</i> 永久免费计划 · <em>今日开放 2,000 个名额</em></div>
+<h1>抖音阴性版<br><span class="grad">免费</span><span class="outline">创作</span></h1>
+<div class="hero-sub">让每一个普通想法，都被<span>认真对待</span></div>
+<p class="hero-desc">我们把复杂的视频生产流程拆解成轻量的模块，脚本、分镜、封面、配音、审片一站式完成。不设门槛，不押预算，抖音阴性版免费为所有创作者保留完整功能。</p>
+<div class="hero-actions">
+<a href="#start" class="btn btn-primary">立即免费使用
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+</a>
+<a href="#works" class="btn btn-ghost">先看看别人怎么做</a>
+</div>
+<div class="stats">
+<div class="stat"><b>0<i>元</i></b><span>基础功能永久免费</span></div>
+<div class="stat"><b>48<i>万+</i></b><span>创作者已加入</span></div>
+<div class="stat"><b>2.1<i>亿</i></b><span>累计生成脚本片段</span></div>
+</div>
+</div>
+
+<div class="hero-visual">
+<div class="float-card fc-1">
+<div class="fc-title">今日脚本生成</div>
+<div class="fc-val c1">12,860</div>
+<div class="fc-bar"><i></i></div>
+</div>
+<div class="float-card fc-2">
+<div class="fc-row"><span class="fc-dot"></span><span style="font-size:13px;font-weight:600">社区在线协作</span></div>
+<div class="fc-title" style="margin:8px 0 0">1,472 人正在编辑</div>
+</div>
+<div class="float-card fc-3">
+<div class="fc-title">免费额度剩余</div>
+<div class="fc-val c3">∞</div>
+</div>
+<div class="phone">
+<div class="phone-notch"></div>
+<div class="phone-screen">
+<div class="pv-gradient"><div class="pv-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+<div class="pv-body">
+<div class="pv-line grad w70"></div>
+<div class="pv-line w88"></div>
+<div class="pv-line w45"></div>
+<div class="pv-line w70"></div>
+<div class="pv-tags"><span class="pv-tag">#脚本</span><span class="pv-tag">#分镜</span><span class="pv-tag">#免费</span></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 数据 -->
+<section class="metrics">
+<div class="metrics-inner">
+<div class="metric"><b>486,000+</b><span>注册创作者</span></div>
+<div class="metric"><b>27,300</b><span>免费模板库</span></div>
+<div class="metric"><b>99.2%</b><span>创作者续用率</span></div>
+<div class="metric"><b>7×24</b><span>社区互助响应</span></div>
+</div>
+</section>
+
+<!-- 核心能力 -->
+<section class="sec" id="capabilities">
+<div class="wrap">
+<div class="sec-head reveal">
+<div class="eyebrow">Core Capabilities</div>
+<h2>把专业流程，<br>做成<span class="grad">人人可用</span>的工具</h2>
+<p class="sec-desc">抖音阴性版免费并不追求功能堆砌，而是把创作者真正高频使用的环节打磨到顺手。从第一个念头到成片发布，每一步都有对应的免费能力支持。</p>
+</div>
+<div class="features">
+<div class="f-card reveal">
+<div class="f-icon"><svg viewBox="0 0 24 24"><path d="M4 5h16M4 12h10M4 19h13"/><circle cx="19" cy="12" r="2"/></svg></div>
+<h3>轻量脚本引擎</h3>
+<p>输入主题与时长，自动生成结构完整的分镜脚本，开场钩子、情绪节奏、结尾引导一应俱全，支持逐段二次编辑与风格切换。</p>
+<div class="f-meta"><span>智能分镜</span><span>口播稿</span><span>多风格</span></div>
+</div>
+<div class="f-card reveal">
+<div class="f-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/><path d="M10 9l4 2.5-4 2.5z"/></svg></div>
+<h3>可视化预览</h3>
+<p>在浏览器里直接查看画面构图与字幕节奏，时间轴拖拽即可微调，无需渲染等待，改一版只要几秒钟。</p>
+<div class="f-meta"><span>实时预览</span><span>时间轴</span><span>字幕节奏</span></div>
+</div>
+<div class="f-card reveal">
+<div class="f-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div>
+<h3>社区灵感池</h3>
+<p>每天更新真实创作者拆解案例，包含选题来源、成片数据与复盘笔记，看得懂、学得会、用得上。</p>
+<div class="f-meta"><span>案例拆解</span><span>数据复盘</span><span>选题库</span></div>
+</div>
+<div class="f-card reveal">
+<div class="f-icon"><svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg></div>
+<h3>协作与审片</h3>
+<p>邀请伙伴加入同一份项目，逐帧留评论、标记修改点，版本自动留存，团队沟通不再依赖零散截图。</p>
+<div class="f-meta"><span>多人协作</span><span>逐帧评论</span><span>版本管理</span></div>
+</div>
+<div class="f-card reveal">
+<div class="f-icon"><svg viewBox="0 0 24 24"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></svg></div>
+<h3>数据回看</h3>
+<p>把发布后的播放、完播、互动数据回流到项目里，和当时的脚本版本一一对应，找到真正有效的表达方式。</p>
+<div class="f-meta"><span>成片归因</span><span>曲线对比</span><span>复盘卡</span></div>
+</div>
+<div class="f-card reveal">
+<div class="f-icon"><svg viewBox="0 0 24 24"><path d="M20.8 8.6a5 5 0 0 0-8.8-3 5 5 0 0 0-8.8 3c0 4 5.2 8.2 8.8 10.4 3.6-2.2 8.8-6.4 8.8-10.4z"/></svg></div>
+<h3>免费且真诚</h3>
+<p>基础创作能力永久免费开放，不锁导出、不藏关键功能。我们相信好的工具应该先被用起来，再谈别的。</p>
+<div class="f-meta"><span>永久免费</span><span>无水印导出</span><span>无功能陷阱</span></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 流程 -->
+<section class="sec" id="flow" style="padding-top:20px">
+<div class="wrap">
+<div class="sec-head center reveal">
+<div class="eyebrow">Creative Flow</div>
+<h2>四步，从想法到<span class="grad">成片</span></h2>
+<p class="sec-desc">流程被设计得足够短，短到你可以在一个下午完成一条完整内容。</p>
+</div>
+<div class="flow">
+<div class="flow-step reveal"><div class="flow-num">01</div><h3>输入灵感</h3><p>一句话、一个热点、一段素材，都能作为起点。</p></div>
+<div class="flow-step reveal"><div class="flow-num">02</div><h3>生成脚本</h3><p>自动匹配结构与节奏，逐段可改、可替换。</p></div>
+<div class="flow-step reveal"><div class="flow-num">03</div><h3>预览调整</h3><p>在时间轴上直接调字幕、镜头时长与配乐。</p></div>
+<div class="flow-step reveal"><div class="flow-num">04</div><h3>导出发布</h3><p>无水印导出，作品与复盘数据自动归档。</p></div>
+</div>
+</div>
+</section>
+
+<!-- 作品灵感 -->
+<section class="sec" id="works" style="padding-top:20px">
+<div class="wrap">
+<div class="sec-head reveal">
+<div class="eyebrow">Works & Inspiration</div>
+<h2>社区里正在<span class="grad">发生</span>的作品</h2>
+<p class="sec-desc">这些作品来自真实用户，题材各异，但都使用了抖音阴性版免费的脚本结构与预览能力。点击卡片可以看到作者留下的创作笔记。</p>
+</div>
+<div class="gallery">
+<div class="g-item g-1 reveal">
+<div class="g-art art-a"></div><div class="g-ov"></div>
+<span class="g-tag">生活方式</span>
+<div class="g-info"><h4>《把二十四节气拍成一支舞》</h4><p><i></i>作者 林间的风 · 完播率 68%</p></div>
+</div>
+<div class="g-item g-2 reveal">
+<div class="g-art art-b"></div><div class="g-ov"></div>
+<span class="g-tag">知识科普</span>
+<div class="g-info"><h4>《三分钟讲清楚一个经济学概念》</h4><p><i></i>作者 阿北不迷路</p></div>
+</div>
+<div class="g-item g-3 reveal">
+<div class="g-art art-c"></div><div class="g-ov"></div>
+<span class="g-tag">美食</span>
+<div class="g-info"><h4>《一口锅的深夜食堂》</h4><p><i></i>作者 深夜灶台</p></div>
+</div>
+<div class="g-item g-4 reveal">
+<div class="g-art art-d"></div><div class="g-ov"></div>
+<span class="g-tag">剧情短片</span>
+<div class="g-info"><h4>《电梯里的第七个人》</h4><p><i></i>作者 楼下便利店</p></div>
+</div>
+<div class="g-item g-4 reveal">
+<div class="g-art art-e"></div><div class="g-ov"></div>
+<span class="g-tag">旅行记录</span>
+<div class="g-info"><h4>《沿着海岸线走了七天》</h4><p><i></i>作者 陈一半</p></div>
+</div>
+<div class="g-item g-4 reveal">
+<div class="g-art art-f"></div><div class="g-ov"></div>
+<span class="g-tag">手工技艺</span>
+<div class="g-info"><h4>《一把旧椅子的重生》</h4><p><i></i>作者 木作老周</p></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 免费资源 -->
+<section class="sec" id="resources" style="padding-top:20px">
+<div class="wrap">
+<div class="sec-head reveal">
+<div class="eyebrow">Free Resources</div>
+<h2>免费资源库，<span class="grad">持续更新</span></h2>
+<p class="sec-desc">模板、结构、封面样式全部免费下载与套用。每一份资源都被真实项目验证过，不是摆设。</p>
+</div>
+<div class="tpl-tabs reveal">
+<button class="tpl-tab on" data-cat="all">全部</button>
+<button class="tpl-tab" data-cat="script">脚本结构</button>
+<button class="tpl-tab" data-cat="cover">封面样式</button>
+<button class="tpl-tab" data-cat="rhythm">节奏模板</button>
+</div>
+<div class="tpl-grid" id="tplGrid">
+<div class="tpl-card reveal" data-cat="script">
+<div class="tpl-top"><h4>15 秒钩子脚本结构</h4><span class="tpl-free">FREE</span></div>
+<p>前 3 秒抛出冲突，第 8 秒反转，结尾留问句。适合观点类、生活记录类内容，附 6 组可直接替换的句式。</p>
+<div class="tpl-foot"><span>12,480 次使用</span><a href="#start">去使用<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+</div>
+<div class="tpl-card reveal" data-cat="rhythm">
+<div class="tpl-top"><h4>三段式情绪节奏</h4><span class="tpl-free">FREE</span></div>
+<p>铺陈、推高、回落三段时长配比模板，可直接导入时间轴。适合故事类、情感类与纪录类内容。</p>
+<div class="tpl-foot"><span>9,120 次使用</span><a href="#start">去使用<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+</div>
+<div class="tpl-card reveal" data-cat="cover">
+<div class="tpl-top"><h4>高对比封面组</h4><span class="tpl-free">FREE</span></div>
+<p>18 套可直接套用的封面版式，自动适配人物、食物、风景三类主体，文字层级清晰，缩略图也看得清。</p>
+<div class="tpl-foot"><span>15,730 次使用</span><a href="#start">去使用<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+</div>
+<div class="tpl-card reveal" data-cat="script">
+<div class="tpl-top"><h4>口播提词卡模板</h4><span class="tpl-free">FREE</span></div>
+<p>按呼吸节奏分段的口播稿模板，自动标注停顿点与重音，适合新手对着镜头不慌。</p>
+<div class="tpl-foot"><span>7,860 次使用</span><a href="#start">去使用<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+</div>
+<div class="tpl-card reveal" data-cat="rhythm">
+<div class="tpl-top"><h4>快剪节奏节拍表</h4><span class="tpl-free">FREE</span></div>
+<p>按 BPM 标记的剪辑点表格，配合常用音效位置提示，做出有呼吸感的快剪需要它。</p>
+<div class="tpl-foot"><span>6,340 次使用</span><a href="#start">去使用<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+</div>
+<div class="tpl-card reveal" data-cat="cover">
+<div class="tpl-top"><h4>极简文字封面</h4><span class="tpl-free">FREE</span></div>
+<p>只用一行字与一个色块构成，适合知识类与严肃内容，克制但足够抓眼。</p>
+<div class="tpl-foot"><span>11,050 次使用</span><a href="#start">去使用<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 用户故事 -->
+<section class="sec" style="padding-top:20px">
+<div class="wrap">
+<div class="sec-head reveal">
+<div class="eyebrow">Creator Stories</div>
+<h2>他们说，好用是<span class="grad">感受</span>出来的</h2>
+</div>
+<div class="stories">
+<div class="story big reveal">
+<div class="quote-mark">“</div>
+<p>我原本以为免费工具只能做点皮毛，结果第一条用平台脚本结构做的片子，播放量就翻了六倍。最打动我的是改稿不用等，改完立刻看到效果，那种顺畅感很难得。</p>
+<div class="story-user"><div class="avatar av1">林</div><div><b>林间的风</b><span>生活方式创作者 · 入驻 14 个月</span></div></div>
+</div>
+<div class="story reveal">
+<div class="quote-mark">“</div>
+<p>作为团队里负责审片的人，逐帧评论解决了我很大的麻烦。不用再截屏标注了，直接在画面上圈出来。</p>
+<div class="story-user"><div class="avatar av2">周</div><div><b>周制片</b><span>小型内容团队</span></div></div>
+</div>
+<div class="story reveal">
+<div class="quote-mark">“</div>
+<p>刚起步的时候最缺预算，抖音阴性版免费让我把精力放在内容本身。现在我已经能靠创作养活自己了。</p>
+<div class="story-user"><div class="avatar av3">陈</div><div><b>陈一半</b><span>旅行记录 · 入驻 2 年</span></div></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 社区动态 -->
+<section class="sec" id="community" style="padding-top:20px">
+<div class="wrap">
+<div class="sec-head reveal">
+<div class="eyebrow">Community Updates</div>
+<h2>社区里，每天都有<span class="grad">新东西</span></h2>
+<p class="sec-desc">产品更新、线下活动、创作者共学，都发生在这里。我们保持高频更新，也认真听每一条反馈。</p>
+</div>
+<div class="updates">
+<div class="upd reveal">
+<div class="upd-date"><b>08</b><span>MAR</span></div>
+<div class="upd-body"><h4>免费模板库升级至 2.7 万套</h4><p>新增知识科普、非遗手作、城市漫游三个垂类的脚本结构，全部支持一键导入时间轴并二次编辑。</p><span class="tagline">产品更新</span></div>
+</div>
+<div class="upd reveal">
+<div class="upd-date"><b>05</b><span>MAR</span></div>
+<div class="upd-body"><h4>第十二期创作者共学营开营</h4><p>为期两周的线上共学，包含选题拆解、脚本打磨与发布复盘，已连续举办十二期，累计参与超过 1.8 万人。</p><span class="tagline">社区活动</span></div>
+</div>
+<div class="upd reveal">
+<div class="upd-date"><b>01</b><span>MAR</span></div>
+<div class="upd-body"><h4>协作者人数上限提升至 20 人</h4><p>免费计划同样享受多人协作能力，团队、学生小组与兴趣社团都能把成员拉进同一个项目里。</p><span class="tagline">功能开放</span></div>
+</div>
+<div class="upd reveal">
+<div class="upd-date"><b>26</b><span>FEB</span></div>
+<div class="upd-body"><h4>数据回看支持版本对比</h4><p>同一项目的不同脚本版本可与成片数据一一绑定，直观看到改动带来的播放与完播变化。</p><span class="tagline">产品更新</span></div>
+</div>
+<div class="upd reveal">
+<div class="upd-date"><b>20</b><span>FEB</span></div>
+<div class="upd-body"><h4>创作者圆桌：小体量如何被看见</h4><p>邀请六位不同赛道的创作者，聊了聊低预算内容的破圈经验，完整回放已上线社区资料区。</p><span class="tagline">社区活动</span></div>
+</div>
+<div class="upd reveal">
+<div class="upd-date"><b>15</b><span>FEB</span></div>
+<div class="upd-body"><h4>导出彻底无水印，免费计划同步</h4><p>这是社区呼声最高的一条反馈，现在所有计划导出的成片均不带任何平台标识。</p><span class="tagline">功能开放</span></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 常见问题 -->
+<section class="sec" id="faq" style="padding-top:20px">
+<div class="wrap">
+<div class="sec-head center reveal">
+<div class="eyebrow">FAQ</div>
+<h2>你可能想<span class="grad">问</span>的</h2>
+</div>
+<div class="faq" id="faqList">
+<div class="faq-item open">
+<button class="faq-q">抖音阴性版免费真的永久免费吗？<i>+</i></button>
+<div class="faq-a"><div>基础创作能力永久免费，包括脚本生成、可视化预览、无水印导出、模板下载和多人协作。我们没有隐藏额度或强制付费墙，付费计划只针对更高并发、更大存储等企业级需求。</div></div>
+</div>
+<div class="faq-item">
+<button class="faq-q">使用平台需要具备剪辑基础吗？<i>+</i></button>
+<div class="faq-a"><div>不需要。整个流程从输入一句话开始，脚本结构会帮你搭好骨架，预览界面也做了大量化简。大部分新手用户在一个下午内就能完成第一条完整内容。</div></div>
+</div>
+<div class="faq-item">
+<button class="faq-q">生成的内容版权归谁？<i>+</i></button>
+<div class="faq-a"><div>归你。平台不主张任何生成内容的著作权，你可以自由使用、修改、商用。我们只会在获得你明确授权的前提下，将作品收录进社区灵感池。</div></div>
+</div>
+<div class="faq-item">
+<button class="faq-q">免费版和付费版主要差别在哪？<i>+</i></button>
+<div class="faq-a"><div>主要差别在于协作规模、存储空间与批量处理能力。功能层面免费版已经覆盖完整的创作链路，付费版面向的是中小型团队与高频批量生产场景。</div></div>
+</div>
+<div class="faq-item">
+<button class="faq-q">数据安全如何保障？<i>+</i></button>
+<div class="faq-a"><div>项目内容加密存储，访问权限严格绑定账号。我们不会将你的项目内容用于模型训练，也不会向第三方出售任何创作者数据。</div></div>
+</div>
+<div class="faq-item">
+<button class="faq-q">可以把项目迁移到其他工具吗？<i>+</i></button>
+<div class="faq-a"><div>可以。脚本与分镜结构支持标准格式导出，封面与素材均为通用格式，不存在锁定。我们希望你留下来是因为好用，而不是因为走不了。</div></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="start">
+<div class="wrap">
+<div class="cta-box reveal">
+<h2>现在，把你的第一个想法<span class="grad">做出来</span></h2>
+<p>不需要绑卡，不需要试用期倒计时。注册即可使用完整免费能力，今天就开始生产属于你的第一支作品。</p>
+<div class="cta-form">
+<input type="email" placeholder="输入邮箱，获取免费创作账户" aria-label="邮箱">
+<button class="btn btn-primary" id="joinBtn">免费开通</button>
+</div>
+<p class="cta-note">已有 486,000+ 创作者加入 · 无需信用卡 · 随时可退出</p>
+</div>
+</div>
+</section>
+
+<footer>
+<div class="wrap">
+<div class="foot-grid">
+<div class="foot-brand">
+<a href="#" class="logo"><span class="logo-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2v12.5a3.5 3.5 0 1 1-3.5-3.5" stroke="#08080d" stroke-width="2.2" stroke-linecap="round"/><path d="M13 2c.4 3.4 2.6 5.6 6 6" stroke="#08080d" stroke-width="2.2" stroke-linecap="round"/></svg></span><b>抖音阴性版免费</b></a>
+<p>面向所有内容创作者的轻量创作平台。用更少的门槛，换更自由地表达。</p>
+<div class="foot-social">
+<a href="#" aria-label="微博"><svg viewBox="0 0 24 24"><path d="M10 4c-4 0-7 2.6-7 5.8 0 3.2 3 5.8 7 5.8s7-2.6 7-5.8S14 4 10 4zm-2 8.6a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/><path d="M17 3c2.8 0 5 2.2 5 5s-2.2 5-5 5v-2c1.7 0 3-1.3 3-3s-1.3-3-3-3V3z"/></svg></a>
+<a href="#" aria-label="社区"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-9 9c0 1.7.5 3.3 1.3 4.6L3 21l4.6-1.2A9 9 0 1 0 12 3zm-3 8h6v2H9v-2z"/></svg></a>
+<a href="#" aria-label="邮件"><svg viewBox="0 0 24 24"><path d="M3 5h18v14H3zM3 6l9 7 9-7"/></svg></a>
+</div>
+</div>
+<div class="foot-col">
+<h5>产品</h5>
+<a href="#capabilities">核心能力</a>
+<a href="#flow">创作流程</a>
+<a href="#resources">免费资源</a>
+<a href="#community">更新日志</a>
+</div>
+<div class="foot-col">
+<h5>社区</h5>
+<a href="#works">作品灵感</a>
+<a href="#">创作者共学</a>
+<a href="#">圆桌回放</a>
+<a href="#">反馈建议</a>
+</div>
+<div class="foot-col">
+<h5>关于</h5>
+<a href="#">团队介绍</a>
+<a href="#">使用条款</a>
+<a href="#">隐私政策</a>
+<a href="#">联系我们</a>
+</div>
+</div>
+<div class="foot-bottom">
+<span>© 2024 抖音阴性版免费 · 保留所有权利</span>
+<div class="fb-links"><a href="#">服务协议</a><a href="#">隐私说明</a><a href="#">Cookie 偏好</a></div>
+</div>
+</div>
+</footer>
+
+<button class="top-btn" id="topBtn" aria-label="回到顶部"><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
+
+<script>
+(function(){
+  "use strict";
+
+  /* 导航滚动状态 */
+  var header = document.getElementById('header');
+  var topBtn = document.getElementById('topBtn');
+  function onScroll(){
+    var y = window.scrollY || document.documentElement.scrollTop;
+    if(y > 20){ header.classList.add('scrolled'); } else { header.classList.remove('scrolled'); }
+    if(y > 520){ topBtn.classList.add('show'); } else { topBtn.classList.remove('show'); }
+    updateNav(y);
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+
+  /* 移动端菜单 */
+  var navToggle = document.getElementById('navToggle');
+  var navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', function(){
+    navToggle.classList.toggle('on');
+    var open = navToggle.classList.contains('on');
+    navLinks.style.display = open ? 'flex' : '';
+    if(open){
+      navLinks.style.position = 'absolute';
+      navLinks.style.top = '66px';
+      navLinks.style.left = '0';
+      navLinks.style.right = '0';
+      navLinks.style.flexDirection = 'column';
+      navLinks.style.background = 'rgba(10,10,15,.98)';
+      navLinks.style.padding = '16px 18px 22px';
+      navLinks.style.borderBottom = '1px solid rgba(255,255,255,.1)';
+      navLinks.style.gap = '4px';
+      navLinks.style.alignItems = 'stretch';
+      navLinks.querySelectorAll('a').forEach(function(a){ a.style.padding = '12px 14px'; });
+    }
+  });
+  navLinks.addEventListener('click', function(e){
+    if(e.target.tagName === 'A' && navToggle.classList.contains('on')){
+      navToggle.classList.remove('on');
+      navLinks.style.display = '';
+    }
+  });
+
+  /* 导航高亮 */
+  var sections = ['capabilities','flow','works','resources','community','faq'];
+  var navAnchors = Array.prototype.slice.call(navLinks.querySelectorAll('a'));
+  function updateNav(y){
+    var current = '';
+    sections.forEach(function(id){
+      var el = document.getElementById(id);
+      if(el && y + 180 >= el.offsetTop){ current = id; }
+    });
+    navAnchors.forEach(function(a){
+      var href = a.getAttribute('href').replace('#','');
+      a.classList.toggle('active', href === current);
+    });
+  }
+
+  /* 滚动入场 */
+  var revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){
+          en.target.classList.add('in');
+          io.unobserve(en.target);
+        }
+      });
+    }, {threshold:0.12, rootMargin:'0px 0px -60px 0px'});
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  /* FAQ 手风琴 */
+  var faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach(function(item){
+    var q = item.querySelector('.faq-q');
+    var a = item.querySelector('.faq-a');
+    if(item.classList.contains('open')){ a.style.maxHeight = a.scrollHeight + 'px'; }
+    q.addEventListener('click', function(){
+      var isOpen = item.classList.contains('open');
+      faqItems.forEach(function(other){
+        other.classList.remove('open');
+        other.querySelector('.faq-a').style.maxHeight = null;
+      });
+      if(!isOpen){
+        item.classList.add('open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }
+    });
+  });
+
+  /* 资源筛选 */
+  var tabs = document.querySelectorAll('.tpl-tab');
+  var tplCards = document.querySelectorAll('.tpl-card');
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      tabs.forEach(function(t){ t.classList.remove('on'); });
+      tab.classList.add('on');
+      var cat = tab.getAttribute('data-cat');
+      tplCards.forEach(function(card){
+        var show = (cat === 'all') || (card.getAttribute('data-cat') === cat);
+        card.style.display = show ? 'flex' : 'none';
+        if(show){ card.classList.add('in'); }
+      });
+    });
+  });
+
+  /* 主视觉浮动数字 */
+  var counterEl = document.querySelector('.fc-val.c1');
+  if(counterEl){
+    var target = 12860;
+    var start = 0;
+    var dur = 1800;
+    var t0 = null;
+    function step(ts){
+      if(!t0) t0 = ts;
+      var p = Math.min((ts - t0) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      var val = Math.floor(start + (target - start) * eased);
+      counterEl.textContent = val.toLocaleString('en-US');
+      if(p < 1){ requestAnimationFrame(step); }
+    }
+    setTimeout(function(){ requestAnimationFrame(step); }, 600);
+  }
+
+  /* 邮箱按钮 */
+  var joinBtn = document.getElementById('joinBtn');
+  if(joinBtn){
+    joinBtn.addEventListener('click', function(){
+      var input = document.querySelector('.cta-form input');
+      var val = input ? input.value.trim() : '';
+      var ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+      if(!ok){
+        if(input){
+          input.style.borderColor = '#fe2c55';
+          input.style.boxShadow = '0 0 0 3px rgba(254,44,85,.18)';
+          input.focus();
+        }
+        joinBtn.textContent = '请输入有效邮箱';
+        setTimeout(function(){ joinBtn.textContent = '免费开通'; }, 1800);
+        return;
+      }
+      joinBtn.textContent = '正在为你开通…';
+      joinBtn.disabled = true;
+      setTimeout(function(){
+        joinBtn.textContent = '开通成功 ✓';
+        joinBtn.style.background = 'linear-gradient(135deg,#25f4ee,#7b6cff)';
+        if(input){ input.value = ''; input.style.borderColor = ''; input.style.boxShadow = ''; }
+        setTimeout(function(){
+          joinBtn.textContent = '免费开通';
+          joinBtn.disabled = false;
+        }, 2600);
+      }, 900);
+    });
+  }
+
+  /* 回到顶部 */
+  topBtn.addEventListener('click', function(){
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  /* 作品卡轻微倾斜 */
+  document.querySelectorAll('.g-item').forEach(function(el){
+    el.addEventListener('mousemove', function(e){
+      var r = el.getBoundingClientRect();
+      var x = (e.clientX - r.left) / r.width - 0.5;
+      var y = (e.clientY - r.top) / r.height - 0.5;
+      el.style.transform = 'scale(1.018) rotateX(' + (-y*3) + 'deg) rotateY(' + (x*3) + 'deg)';
+    });
+    el.addEventListener('mouseleave', function(){ el.style.transform = ''; });
+  });
+
+  onScroll();
+})();
+</script>
+</body>
+             </html>
